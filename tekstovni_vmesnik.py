@@ -1,11 +1,12 @@
 import model
 napaka = 'Kontakt s temi podatki ne obstaja!\n'
 
-# DATOTEKA_S_STANJEM = 'kontakti.json'
+# DATOTEKA_S_STANJEM = 'stanje.json'
+
 # try:
-#     imenik = Imenik.nalozi_stanje(DATOTEKA_S_STANJEM)
+#     moj_imenik = Imenik(DATOTEKA_S_STANJEM)
 # except FileNotFoundError:
-#     imenik = Imenik()
+#     moj_imenik = Imenik()
     
 moj_imenik = model.Imenik()
 

@@ -1,3 +1,5 @@
+import json
+
 VEC_ISTIH_PRIIMKOV = 'V'
 
 # class Uporabnik:
@@ -22,8 +24,11 @@ VEC_ISTIH_PRIIMKOV = 'V'
 # imenik bo seznam seznamov
 
 class Imenik:
-    def __init__(self):
-        self.podatki = []
+    def __init__(self, podatki=None):
+        if podatki is None:
+            self.podatki = []
+        else:
+            self.podatki = podatki
     
     def priimki_v_imeniku(self):
         sez = []
@@ -87,7 +92,6 @@ class Imenik:
             
     def uredi_kontakt(self):
         pass
-
 
     def seznam_s_podatki(self):
         return self.podatki

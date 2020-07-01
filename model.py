@@ -1,39 +1,58 @@
-class Uporabnik:
-    def __init__(self, uporabnisko_ime, zasifrirano_geslo, podatki):
-        self.uporabnisko_ime = uporabnisko_ime
-        self.zasifrirano_geslo = zasifrirano_geslo
-        self.podatki = podatki
+# class Uporabnik:
+#     def __init__(self, uporabnisko_ime, zasifrirano_geslo, podatki):
+#         self.uporabnisko_ime = uporabnisko_ime
+#         self.zasifrirano_geslo = zasifrirano_geslo
+#         self.podatki = podatki
     
-    def preveri_geslo(self, zasifrirano_geslo):
-        if self.zasifrirano_geslo != zasifrirano_geslo:
-            raise ValueError('Geslo je napačno!')
+#     def preveri_geslo(self, zasifrirano_geslo):
+#         if self.zasifrirano_geslo != zasifrirano_geslo:
+#             raise ValueError('Geslo je napačno!')
     
+#     def shrani_stanje(self, ime_datoteke):
+#         slovar_stanja = {
+#             'uporabnisko_ime': self.uporabnisko_ime,
+#             'zasifrirano_geslo': self.zasifrirano_geslo,
+#             'podatki': self.podatki.seznam_s_podatki(),
+#         }
+#         with open(ime_datoteke, 'w') as datoteka:
+#             json.dump(slovar_stanja, datoteka, ensure_ascii=False, indent=4)
 
-# imenik bo slovar, katerega ključi bodo priimki (ti so v naboru)
+# imenik bo seznam seznamov
 
 class Imenik:
     def __init__(self):
-        self.podatki = {}
+        self.podatki = []
+    
+    def priimki_v_imeniku(self):
+        sez = []
+        for seznam in self.podatki:
+            sez.append(seznam[0])
+        return sez
 
-    def prestej_stevilo_priimkov(self, priimek):
-        if (priimek, 1) not in self.podatki:
-            return 0
-        vsota = 0
-        for nabor in self.podatki.keys:
-            if nabor[0] == priimek:
-                vsota += 1
-        return vsota
+    def imena_v_imeniku(self):
+        sez = []
+        for seznam in self.podatki:
+            sez.append(seznam[1])
+        return sez
 
-    # def dodaj_priimek(self, priimek):
-    #     n = prestej_stevilo_priimkov(priimek)
-    #     self.podatki[(priimek, n + 1)] = []
+    def stevilke_v_imeniku(self):
+        sez = []
+        for seznam in self.podatki:
+            sez.append(seznam[2])
+        return sez
 
-    # def dodaj_ime(self, ime):
-    #     self.podatki
+    def dodaj_kontakt(self, priimek, ime, stevilka, posta, roj_dan):
+        self.podatki.append([priimek, ime, stevilka, posta, roj_dan])
 
-    # def dodaj_podatke(self, priimek, ime, telefonska_stevilka, el_posta, rojstni_dan, dodatno):
-    #     self.podatki[priimek] = [ime, telefonska_stevilka, el_posta, rojstni_dan, dodatno]
+    def poisci_stevilko(self):
+        pass
 
-    def dodaj_podadtke(self, priimek, ime, telefonska_stevilka, el_posta, rojstni_dan, dodatno):
-        n = prestej_stevilo_priimkov(priimek)
-        self.podatki[(priimek, n + 1)] = [ime, telefonska_stevilka, el_posta, rojstni_dan, dodatno]    
+    def izbrisi_kontakt(self):
+        pass
+
+    def uredi_kontakt(self):
+        pass
+
+
+    def seznam_s_podatki(self):
+        return self.podatki

@@ -1,4 +1,5 @@
 import model
+napaka = 'Kontakt s temi podatki ne obstaja!\n'
 
 # DATOTEKA_S_STANJEM = 'kontakti.json'
 # try:
@@ -32,48 +33,100 @@ def zahtevaj_vnos():
             return int(moznost)
 
 def vnos_priimka():
-    return input("Vnesite priimek: ")
+    n = input("Vnesite priimek: ")
+    if n == '':
+        print('Priimek je obvezen!')
+        return vnos_priimka()
+    else:
+        return n
+
 def vnos_imena():
     return input("Vnesite ime: ")
+
 def vnos_stevilke():
-    return input("Vnesite telefonsko številko: ")
+    n = input("Vnesite telefonsko številko: ")
+    if n == '':
+        print('Številka je obvezna!')
+        return vnos_stevilke()
+    try:
+        float(n)
+    except ValueError:
+        print("Vnesite število!")
+        return vnos_stevilke()
+    else:
+        return n
+
 def vnos_el_poste():
     return input("Vnesite elektronsko pošto: ")
+
 def vnos_roj_dneva():
     return input("Vnesite rojstni dan: ")
 
-
 def izvedi_opravilo(stevilo):
     if stevilo == 1:
-        print("Vnesite podatke. Priimek in telefonska številka sta obvezna.")
-        print("Če ostalih podatkov ne veste, samo pritisnite 'enter'.")
-        priimek = vnos_priimka()
-        ime = vnos_imena()
-        stevilka = vnos_stevilke()
-        posta = vnos_el_poste()
-        roj_dan = vnos_roj_dneva()
-        moj_imenik.dodaj_kontakt(priimek, ime, stevilka, posta, roj_dan)
-        print('Kontakt uspešno dodan!')
+        return dodaj_kontakt_v_imenik()
     elif stevilo == 2:
-        moj_imenik.poisci_stevilko()
+        return poisci_stevilko()
     elif stevilo == 3:
-        moj_imenik.izbrisi_kontakt()
+        return izbrisi_kontakt()
     elif stevilo == 4:
-        moj_imenik.uredi_kontakt()
+        return uredi_kontakt()
     elif stevilo == 5:
+        return izpisi_imenik()
+
+def dodaj_kontakt_v_imenik():
+    print("Vnesite podatke. Priimek in telefonska številka sta obvezna.")
+    print("Če ostalih podatkov ne veste, samo pritisnite 'enter'.")
+    priimek = vnos_priimka().upper()
+    ime = vnos_imena().upper()
+    stevilka = vnos_stevilke()
+    posta = vnos_el_poste()
+    roj_dan = vnos_roj_dneva()
+    moj_imenik.dodaj_kontakt(priimek, ime, stevilka, posta, roj_dan)
+    print('Kontakt uspešno dodan!\n')
+    
+def poisci_stevilko():
+    priimek = vnos_priimka().upper()
+    stevilka = moj_imenik.poisci_stevilko_po_priimku(priimek)
+    if stevilka is None:
+        print(napaka)
+    elif stevilka == model.VEC_ISTIH_PRIIMKOV:
+        ime = vnos_imena().upper()
+        stevilka = moj_imenik.poisci_stevilko_po_priimku_in_imenu(priimek, ime)
+        if stevilka is None:
+            print(napaka)
+        else:
+            print(f'Številka:{stevilka}.\n')
+    else:
+        print(f'Številka:{stevilka}.\n')
+
+def izbrisi_kontakt():
+    priimek = vnos_priimka().upper()
+    uspeh = moj_imenik.izbrisi_kontakt_po_priimku(priimek)
+    if uspeh == False:
+        print(napaka)
+    elif uspeh == model.VEC_ISTIH_PRIIMKOV:
+        ime = vnos_imena().upper()
+        uspeh = moj_imenik.izbrisi_kontakt_po_priimku_in_imenu(priimek, ime)
+        if uspeh is None:
+            print(napaka)
+        else:
+            print('Kontakt uspešno izbrisan!\n')
+    else:
+        print('Kontakt uspešno izbrisan!\n')
+
+
+def uredi_kontakt():
+        print('Ta možnost trenutno ni mogoča.\n')
+
+def izpisi_imenik():
         if moj_imenik.podatki == []:
-            print('V imeniku ni še nobenega kontakta.')
+            print('V imeniku ni še nobenega kontakta.\n')
         else:
             print(moj_imenik.podatki)
-            # for kontakt in moj_imenik.podatki:
-            #     print(kontakt)
-
-
-
-
 
 def glavni_meni():
-    print("Pozdravljeni, izberite možnost:")
+    print("Pozdravljeni, izberite možnost:\n")
     while True:
         for x, y in enumerate(seznam_moznosti):
             print(x + 1, y)

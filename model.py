@@ -1,3 +1,5 @@
+VEC_ISTIH_PRIIMKOV = 'V'
+
 # class Uporabnik:
 #     def __init__(self, uporabnisko_ime, zasifrirano_geslo, podatki):
 #         self.uporabnisko_ime = uporabnisko_ime
@@ -29,6 +31,9 @@ class Imenik:
             sez.append(seznam[0])
         return sez
 
+    def stevilko_istih_priimkov(self, priimek):
+        return self.priimki_v_imeniku().count(priimek)
+
     def imena_v_imeniku(self):
         sez = []
         for seznam in self.podatki:
@@ -44,12 +49,42 @@ class Imenik:
     def dodaj_kontakt(self, priimek, ime, stevilka, posta, roj_dan):
         self.podatki.append([priimek, ime, stevilka, posta, roj_dan])
 
-    def poisci_stevilko(self):
-        pass
+    def poisci_stevilko_po_priimku(self, priimek):
+        if self.stevilko_istih_priimkov(priimek) == 0:
+            return None
+        elif self.stevilko_istih_priimkov(priimek) > 1:
+            return VEC_ISTIH_PRIIMKOV
+        else:
+            for kontakt in self.podatki:
+                if kontakt[0] == priimek:
+                    return kontakt[2]
+    
+    def poisci_stevilko_po_priimku_in_imenu(self, priimek, ime):
+        for kontakt in self.podatki:
+            if kontakt[0] == priimek:
+                if kontakt[1] == ime:
+                    return kontakt[2]
+        else:
+            return None
 
-    def izbrisi_kontakt(self):
-        pass
+    def izbrisi_kontakt_po_priimku(self, priimek):
+        if self.stevilko_istih_priimkov(priimek) == 0:
+            return False
+        elif self.stevilko_istih_priimkov(priimek) > 1:
+            return VEC_ISTIH_PRIIMKOV
+        else:
+            for kontakt in self.podatki:
+                if kontakt[0] == priimek:
+                    self.podatki.remove(kontakt)
 
+    def izbrisi_kontakt_po_priimku_in_imenu(self, priimek, ime):
+        for kontakt in self.podatki:
+            if kontakt[0] == priimek:
+                if kontakt[1] == ime:
+                    self.podatki.remove(kontakt)
+        else:
+            return None
+            
     def uredi_kontakt(self):
         pass
 

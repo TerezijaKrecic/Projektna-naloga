@@ -51,6 +51,14 @@ class Imenik:
     def stevilo_istih_priimkov(self, priimek):
         return self.priimki_v_imeniku().count(priimek)
 
+    def obstoj_in_enolicnost_kontakta(self, priimek):
+        if self.stevilo_istih_priimkov(priimek) == 0:
+            return KONTAKT_NE_OBSTAJA
+        elif self.stevilo_istih_priimkov(priimek) > 1:
+            return VEC_ISTIH_PRIIMKOV
+        else:
+            return True        
+
     # def imena_v_imeniku(self):
     #     sez = []
     #     for slovar in self.podatki.keys():
@@ -80,14 +88,13 @@ class Imenik:
         }
 
     def poisci_stevilko_po_priimku(self, priimek):
-        if self.stevilo_istih_priimkov(priimek) == 0:
-            return KONTAKT_NE_OBSTAJA
-        elif self.stevilo_istih_priimkov(priimek) > 1:
-            return VEC_ISTIH_PRIIMKOV
-        else:
+        x = self.obstoj_in_enolicnost_kontakta(priimek)
+        if x == True:
             for slovar in self.podatki.keys():
                 if self.podatki[slovar]['priimek'] == priimek:
-                    return self.podatki[slovar]['stevilka']
+                    return self.podatki[slovar]['stevilka']            
+        else:
+            return x
     
     def poisci_stevilko_po_priimku_in_imenu(self, priimek, ime):
         for slovar in self.podatki.keys():
@@ -98,15 +105,14 @@ class Imenik:
             return KONTAKT_NE_OBSTAJA
 
     def izbrisi_kontakt_po_priimku(self, priimek):
-        if self.stevilo_istih_priimkov(priimek) == 0:
-            return KONTAKT_NE_OBSTAJA
-        elif self.stevilo_istih_priimkov(priimek) > 1:
-            return VEC_ISTIH_PRIIMKOV
-        else:
+        x = self.obstoj_in_enolicnost_kontakta(priimek)
+        if x == True:
             for slovar in self.podatki.keys():
                 if self.podatki[slovar]['priimek'] == priimek:
                     self.podatki.pop(slovar)
                     return True
+        else:
+            return x
 
     def izbrisi_kontakt_po_priimku_in_imenu(self, priimek, ime):
         for slovar in self.podatki.keys():

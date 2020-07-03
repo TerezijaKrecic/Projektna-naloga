@@ -89,27 +89,27 @@ def dodaj_kontakt_v_imenik():
 def poisci_stevilko():
     priimek = vnos_priimka().upper()
     stevilka = moj_imenik.poisci_stevilko_po_priimku(priimek)
-    if stevilka is None:
+    if stevilka == model.KONTAKT_NE_OBSTAJA:
         print(napaka)
     elif stevilka == model.VEC_ISTIH_PRIIMKOV:
         ime = vnos_imena().upper()
         stevilka = moj_imenik.poisci_stevilko_po_priimku_in_imenu(priimek, ime)
-        if stevilka is None:
+        if stevilka == model.KONTAKT_NE_OBSTAJA:
             print(napaka)
         else:
-            print(f'Številka:{stevilka}.\n')
+            print(f'Številka: {stevilka}\n')
     else:
-        print(f'Številka:{stevilka}.\n')
+        print(f'Številka: {stevilka}\n')
 
 def izbrisi_kontakt():
     priimek = vnos_priimka().upper()
     uspeh = moj_imenik.izbrisi_kontakt_po_priimku(priimek)
-    if uspeh == False:
+    if uspeh == model.KONTAKT_NE_OBSTAJA:
         print(napaka)
     elif uspeh == model.VEC_ISTIH_PRIIMKOV:
         ime = vnos_imena().upper()
         uspeh = moj_imenik.izbrisi_kontakt_po_priimku_in_imenu(priimek, ime)
-        if uspeh is None:
+        if uspeh == model.KONTAKT_NE_OBSTAJA:
             print(napaka)
         else:
             print('Kontakt uspešno izbrisan!\n')
@@ -121,7 +121,7 @@ def uredi_kontakt():
         print('Ta možnost trenutno ni mogoča.\n')
 
 def izpisi_imenik():
-        if moj_imenik.podatki == []:
+        if moj_imenik.podatki == {}:
             print('V imeniku ni še nobenega kontakta.\n')
         else:
             print(moj_imenik.podatki)

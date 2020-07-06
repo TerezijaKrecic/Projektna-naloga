@@ -80,13 +80,48 @@ def nacrtovanje_imenika():
 def dodaj_kontakt():
     priimek = bottle.request.forms.getunicode('priimek')
     ime = bottle.request.forms.getunicode('ime')
-    stevilka = bottle.request.forms.getunicode('stevilka')
+    stevilka = str(bottle.request.forms.getunicode('stevilka'))
     mail = bottle.request.forms.getunicode('mail')
     rojdan = bottle.request.forms.getunicode('rojdan')
-    nov_imenik.dodaj_kontakt(priimek, ime, stevilka, mail, rojdan)
+    opomba = bottle.request.forms.getunicode('opombe')
+    nov_imenik.dodaj_kontakt(priimek, ime, stevilka, mail, rojdan, opomba)
     bottle.redirect('/')
 
+@bottle.post('/izbrisi-kontakt<indeks>/')
+def izbrisi_kontakt(indeks):
+    slovar_podatkov = nov_imenik.slovar_s_podatki()
+    slovar_podatkov.pop(int(indeks))
+    nov_imenik.uredi_indekse()
+    bottle.redirect('/')
 
+@bottle.get('/uredi-kontakt<indeks>/')
+def uredi_kontakt(indeks):
+    slovar_podatkov = nov_imenik.slovar_s_podatki()
+    return bottle.template('uredi_kontakt.html', imenik=slovar_podatkov, indeks=int(indeks))
 
+@bottle.post('/uredi-kontakt<indeks>/')
+def uredi_kontakt(indeks):
+    priimek = bottle.request.forms.getunicode('priimek')
+    ime = bottle.request.forms.getunicode('ime')
+    stevilka = str(bottle.request.forms.getunicode('stevilka'))
+    mail = bottle.request.forms.getunicode('mail')
+    rojdan = bottle.request.forms.getunicode('rojdan')
+    opombe = bottle.request.forms.getunicode('opombe')
+    stevilo = int(indeks)
+    nov_imenik.uredi_kontakt(stevilo, priimek, ime, stevilka, mail, rojdan, opombe)
+    bottle.redirect('/')
+
+@bottle.get('/poisci-kontakt/')
+def poisci_kontakt():
+    priimek = bottle.request.forms.getunicode('iskanje-priimek')
+    ime = bottle.request.forms.getunicode('iskanje-ime')
+    stevilka = str(bottle.request.forms.getunicode('iskanje-stevilka'))
+    rezultat = nov_imenik.poisci_kontakt(priimek, ime, stevilka)
+    return bottle.template('iskanje.html', rezultat=rezultat)  # rezultat je lahko slovar ali pa obvestilo, da kontakta ni
+
+@bottle.post("/uredi-kontakte-po-priimkih/")
+def uredi_po_priimkih():
+    nov_imenik.uredi_po_priimkih()
+    bottle.redirect('/')
 
 bottle.run(debug=True, reloader=True)

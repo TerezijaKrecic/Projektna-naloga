@@ -1,0 +1,34 @@
+% import model
+
+% rebase('base.html')
+
+<p>Uredi, kar je treba:</p>
+<form action="/uredi-kontakt{{ indeks }}/" method="post">
+    <table>
+      <tr>
+        <td><i>Priimek:</i></td>
+        <td><input type="text" name='priimek' value="{{ imenik[indeks]['priimek'] }}"></td>
+      </tr>
+      <tr>
+        <td><i>Ime:</i></td>
+        <td><input type='text' name='ime' value="{{ imenik[indeks]['ime'] }}"></td>
+      </tr>
+      <tr>
+        <td><i>Telefonska številka:</i></td>
+        <td><input type='number' name='stevilka' required value="{{ imenik[indeks]['stevilka'] }}"></td>
+      </tr>
+      <tr>
+        <td><i>Elektronski naslov:</i></td>
+        <td><input type='email' name='mail' value="{{ imenik[indeks]['mail'] }}"></td>
+      </tr>
+      <tr>
+        <td><i>Rojstni dan:</i></td>
+        <td><input type='date' name='rojdan' value="{{ imenik[indeks]['rojdan'] }}"></td>
+      </tr>
+      <tr>
+        <td><i>Opombe:</i></td>
+        <td><input type='text' name='opombe' value="{{ imenik[indeks]['opombe'] }}"></td>
+      </tr>
+    </table>
+    <button type="submit">Potrdi</button>
+  </form>

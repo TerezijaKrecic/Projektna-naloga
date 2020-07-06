@@ -1,0 +1,21 @@
+% import model
+
+% rebase('base.html')
+
+% if rezultat == model.KONTAKT_NE_OBSTAJA:
+<p>Kontakt s temi podatki žal ne obstaja. Pojdite nazaj in poskusite še enkrat.</p>
+
+% else:
+% for i in rezultat:
+<p><i>Priimek: </i>{{ rezultat[i]['priimek'] }}</p>
+<p><i>Ime: </i>{{ rezultat[i]['ime'] }}</p>
+<p><i>Telefonska številka: </i>{{ rezultat[i]['stevilka'] }}</p>
+<p><i>Elektronski naslov: </i>{{ rezultat[i]['mail'] }}</p>
+<p><i>Rojstni dan: </i>{{ rezultat[i]['rojdan'] }}</p>
+<p><i>Opombe: </i>{{ rezultat[i]['opombe'] }}</p>
+% end
+
+
+<form action="/" method="get">
+    <button type="submit">Nazaj</button>
+</form>

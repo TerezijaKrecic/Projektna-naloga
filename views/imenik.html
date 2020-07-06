@@ -9,28 +9,50 @@
 <table border="1" style="border-collapse: collapse">
   <thead>
     <tr>
+      <th>Indeks</th>
       <th style="width: 100pt">PRIIMEK</th>
       <th style="width: 100pt">IME</th>
       <th style="width: 100pt">ŠTEVILKA</th>
       <th style="width: 100pt">e-mail</th>
       <th style="width: 100pt">ROJSTNI DAN</th>
+      <th style="width: 100pt">OPOMBE</th>
     </tr>
   </thead>
   <tbody>
 % for indeks in imenik:
     <tr>
+      <td>{{ indeks }}</td>
       <td>{{ imenik[indeks]['priimek'] }}</td>
       <td>{{ imenik[indeks]['ime'] }}</td>
       <td>{{ imenik[indeks]['stevilka'] }}</td>
       <td>{{ imenik[indeks]['mail'] }}</td>
       <td>{{ imenik[indeks]['rojdan'] }}</td>
+      <td>{{ imenik[indeks]['opombe'] }}</td>
+      <td>
+        <form action="/izbrisi-kontakt{{ indeks }}/" method="post">
+          <button type="submit">Izbriši</button>
+        </form>
+      </td>
+      <td>
+        <form action="/uredi-kontakt{{ indeks }}/" method="get">
+          <button type="submit">Uredi</button>
+        </form>
+      </td>
     </tr>
+
 % end
   </tbody>
 </table>
 
+<br>
+<br>
 
+<form action="/uredi-kontakte-po-priimkih/" method="post">
+  <button type="submit">Uredi po priimkih</button>
+</form>
 
+<br>
+<br>
 
   <p>In tu dodaš nove kontakte. Obvezno izpolnite polje s telefonsko številko!</p>
 
@@ -38,7 +60,7 @@
     <table>
       <tr>
         <td><i>Priimek:</i></td>
-        <td><input type="text" name='priimek'><br></td>
+        <td><input type="text" name='priimek'></td>
       </tr>
       <tr>
         <td><i>Ime:</i></td>
@@ -56,5 +78,21 @@
         <td><i>Rojstni dan:</i></td>
         <td><input type='date' name='rojdan'></td>
       </tr>
+      <tr>
+        <td><i>Opombe:</i></td>
+        <td><input type='text' name='opombe'></td>
+      </tr>
     </table>
     <button type="submit">Dodaj</button>
+  </form>
+
+  <br>
+  <br>
+
+  <p>Poišči kontakt:</p>
+  <form action='/poisci-kontakt/' method='get'>
+    Priimek:<input type='text' name='iskanje-priimek'>
+    Ime:<input type='text' name='iskanje-ime'>
+    Telefonska številka:<input type='number' name='iskanje-stevilka'>
+    <button type='submit'>Poišči</button>
+  </form>

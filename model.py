@@ -3,6 +3,7 @@ import random
 
 VEC_ISTIH_PRIIMKOV = 'V'
 KONTAKT_NE_OBSTAJA = 'N'
+PRAZNO = 'Vpišite nekaj!'
 
 DATOTEKA_STANJE = 'stanje.json'
 
@@ -37,113 +38,116 @@ class Uporabnik:
 # slovar_stanja bo slovar, katerega ključi so imena podatkov, vrednosti pa tistih 5 podatkov
 #
 # {
-    # '1':
+    # 1:
     #     {
     #         'priimek': 'NOVAK',
     #         'ime': 'JANEZ',
     #         'številka': '040100100',
     #         'elektronski naslov': 'janez.novak@hotmail.com',
-    #         'rojstni dan': '1. 1. 1990'
+    #         'rojstni dan': '1. 1. 1990',
+    #         'opombe': 'Ta blond guy'
     #     }
 # }
 
 class Kontakt:
     def __init__(self):
         self.podatki = {}
-    
-    # def priimki_v_imeniku(self):
-    #     sez = []
-    #     for slovar in self.podatki.keys():
-    #         sez.append(self.podatki[slovar]['priimek'])
-    #     return sez
-
-    # def stevilo_istih_priimkov(self, priimek):
-    #     return self.priimki_v_imeniku().count(priimek)
-
-    # def obstoj_in_enolicnost_kontakta(self, priimek):  # po priimku
-    #     if self.stevilo_istih_priimkov(priimek) == 0:
-    #         return KONTAKT_NE_OBSTAJA
-    #     elif self.stevilo_istih_priimkov(priimek) > 1:
-    #         return VEC_ISTIH_PRIIMKOV
-    #     else:
-    #         return True        
-
-    # def imena_v_imeniku(self):
-    #     sez = []
-    #     for slovar in self.podatki.keys():
-    #         sez.append(self.podatki[slovar]['ime'])
-    #     return sez
-
-    # def stevilke_v_imeniku(self):
-    #     sez = []
-    #     for slovar in self.podatki.keys():
-    #         sez.append(self.podatki[slovar]['stevilka'])
-    #     return sez
 
     def nov_indeks(self):
         if self.podatki == {}:
-            return 0
+            return 1
         else:
             vsota = 0
             for slovar in self.podatki:
                 vsota += 1
             return vsota + 1
 
-    def dodaj_kontakt(self, priimek, ime, stevilka, posta, roj_dan):
+    def dodaj_kontakt(self, priimek, ime, stevilka, posta, roj_dan, opombe):
         self.podatki[self.nov_indeks()] = {
             'priimek': priimek,
             'ime': ime,
             'stevilka': stevilka,
             'mail': posta,
-            'rojdan': roj_dan
+            'rojdan': roj_dan,
+            'opombe': opombe
         }
 
-    # def poisci_stevilko_po_priimku(self, priimek):
-    #     x = self.obstoj_in_enolicnost_kontakta(priimek)
-    #     if x == True:
-    #         for slovar in self.podatki.keys():
-    #             if self.podatki[slovar]['priimek'] == priimek:
-    #                 return self.podatki[slovar]['stevilka']            
-    #     else:
-    #         return x
-    
-    # def poisci_stevilko_po_priimku_in_imenu(self, priimek, ime):
-    #     for slovar in self.podatki.keys():
-    #         if self.podatki[slovar]['priimek'] == priimek:
-    #             if self.podatki[slovar]['ime'] == ime:
-    #                 return self.podatki[slovar]['stevilka']
-    #     else:
-    #         return KONTAKT_NE_OBSTAJA
+    def uredi_indekse(self):
+        '''Uredi indekse po vrsti z VSEMI nar. števili od 1 do dolžine slovarja'''
+        if self.podatki == {}:
+            pass
+        else:
+            nov_slovar = {}
+            seznam_indeksov = [kljuc for kljuc in self.podatki]
+            for n in range(1, len(seznam_indeksov) + 1):
+                kontakt = self.podatki[seznam_indeksov[n - 1]]
+                self.podatki.pop(seznam_indeksov[n - 1])
+                self.podatki[n] = kontakt
 
-    # def izbrisi_kontakt_po_priimku(self, priimek):
-    #     x = self.obstoj_in_enolicnost_kontakta(priimek)
-    #     if x == True:
-    #         for slovar in self.podatki.keys():
-    #             if self.podatki[slovar]['priimek'] == priimek:
-    #                 self.podatki.pop(slovar)
-    #                 return True
-    #     else:
-    #         return x
+    def uredi_kontakt(self, indeks, priimek, ime, stevilka, mail, rojdan, opombe):
+        self.podatki[indeks]['priimek'] = priimek
+        self.podatki[indeks]['ime'] = ime
+        self.podatki[indeks]['stevilka'] = stevilka
+        self.podatki[indeks]['mail'] = mail
+        self.podatki[indeks]['rojdan'] = rojdan
+        self.podatki[indeks]['opombe'] = opombe
 
-    # def izbrisi_kontakt_po_priimku_in_imenu(self, priimek, ime):
-    #     for slovar in self.podatki.keys():
-    #         if self.podatki[slovar]['priimek'] == priimek:
-    #             if self.podatki[slovar]['ime'] == ime:
-    #                 self.podatki.pop(slovar)
-    #                 return True
-    #     else:
-    #         return KONTAKT_NE_OBSTAJA
-            
-    # def uredi_kontakt(self):
-    #     pass
+    def uredi_po_priimkih(self):
+        pass
+
+    def stevilke_v_imeniku(self):
+        return [self.podatki[i]['stevilka'] for i in self.podatki.keys()]
+
+    def priimki_v_imeniku(self):
+        return [self.podatki[i]['priimek'] for i in self.podatki.keys()]
+
+    def imena_v_imeniku(self):
+        return [self.podatki[i]['ime'] for i in self.podatki.keys()]
+
+    def kontakti_priimek(self, priimek):
+        '''Vrne slovar vseh kontaktov, ki imajo tak priimek'''
+        if priimek is None or priimek == '':
+            return self.podatki
+        else:
+            slovar = {}
+            for i in self.podatki:
+                if self.podatki[i]['priimek'] == priimek:
+                    slovar[i] = self.podatki[i]
+            return slovar
+
+    def kontakti_ime(self, ime, slovar):
+        '''Vrne slovar vseh kontaktov, ki imajo tako ime (in priimek od prej)'''
+        if ime is None or ime == '':
+            return slovar
+        else:
+            slovarcek = {}
+            for i in slovar:
+                if slovar[i]['ime'] == ime:
+                    slovarcek[i] = slovar[i]
+            return slovarcek
+
+    def poisci_kontakt(self, priimek, ime, stevilka):
+        kontakti_s_tem_priimkom = self.kontakti_priimek(priimek)
+        kontakti_s_tem_priimkom_in_imenom = self.kontakti_ime(ime, kontakti_s_tem_priimkom)
+        if stevilka is None or stevilka == '':
+            return kontakti_s_tem_priimkom_in_imenom
+        else:
+            slovar = {}
+            for i in kontakti_s_tem_priimkom_in_imenom:
+                if kontakti_s_tem_priimkom_in_imenom[i]['stevilka'] == stevilka:
+                    slovar[i] = kontakti_s_tem_priimkom_in_imenom[i]
+            if slovar == {}:
+                return KONTAKT_NE_OBSTAJA
+            else:
+                return slovar
 
     def slovar_s_podatki(self):
         return self.podatki
 
-    def shrani_stanje(self, ime_datoteke):
-        with open(ime_datoteke, 'w') as datoteka:
-            json.dump(self.slovar_s_podatki(), datoteka, ensure_ascii=False, indent=4)
+    # def shrani_stanje(self, ime_datoteke):
+    #     with open(ime_datoteke, 'w') as datoteka:
+    #         json.dump(self.slovar_s_podatki(), datoteka, ensure_ascii=False, indent=4)
 
-    def nalozi_stanje(self, ime_datoteke):
-        with open(self.datoteka_s_stanjem, 'r', encoding='utf-8') as f:
-            self.podatki = json.load(f)
+    # def nalozi_stanje(self, ime_datoteke):
+    #     with open(self.datoteka_s_stanjem, 'r', encoding='utf-8') as f:
+    #         self.podatki = json.load(f)

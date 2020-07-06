@@ -18,9 +18,8 @@ Osebni imenik (vpišeš se s svojim geslom in potem imaš po vrsticah možnost d
 - tel. številka (mednarodna, na začetku imaš privzeto izbiro +386)
 - mail
 - rojstni dan (2 spustna seznama za dan in mesec ter navaden za letnico)
-- dodaten opis
 To je vse v eni vrstici, na koncu obrazca imaš pa gumb 'Shrani'.
-Ime, priimek in tel. št. je obvezno za izpolniti, ostalo pa ne.
+Priimek in tel. št. je obvezno za izpolniti, ostalo pa ne.
 Ko se vrstica shrani, se shrani po priimkih.
 Imaš možnost, da vsak kontakt urediš ali izbrišeš.
 

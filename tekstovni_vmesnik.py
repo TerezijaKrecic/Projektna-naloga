@@ -1,14 +1,14 @@
-import model
+import model_za_text_vmesnik
 napaka = 'Kontakt s temi podatki ne obstaja!\n'
 
 # DATOTEKA_S_STANJEM = 'stanje.json'
 
 # try:
-#     moj_imenik = Imenik(DATOTEKA_S_STANJEM)
+#     moj_imenik = Kontakt(DATOTEKA_S_STANJEM)
 # except FileNotFoundError:
-#     moj_imenik = Imenik()
+#     moj_imenik = Kontakt()
     
-moj_imenik = model.Imenik()
+moj_imenik = model_za_text_vmesnik.Kontakt()
 
 seznam_moznosti = [
     "Dodaj kontakt",
@@ -89,12 +89,12 @@ def dodaj_kontakt_v_imenik():
 def poisci_stevilko():
     priimek = vnos_priimka().upper()
     stevilka = moj_imenik.poisci_stevilko_po_priimku(priimek)
-    if stevilka == model.KONTAKT_NE_OBSTAJA:
+    if stevilka == model_za_text_vmesnik.KONTAKT_NE_OBSTAJA:
         print(napaka)
-    elif stevilka == model.VEC_ISTIH_PRIIMKOV:
+    elif stevilka == model_za_text_vmesnik.VEC_ISTIH_PRIIMKOV:
         ime = vnos_imena().upper()
         stevilka = moj_imenik.poisci_stevilko_po_priimku_in_imenu(priimek, ime)
-        if stevilka == model.KONTAKT_NE_OBSTAJA:
+        if stevilka == model_za_text_vmesnik.KONTAKT_NE_OBSTAJA:
             print(napaka)
         else:
             print(f'Številka: {stevilka}\n')
@@ -104,12 +104,12 @@ def poisci_stevilko():
 def izbrisi_kontakt():
     priimek = vnos_priimka().upper()
     uspeh = moj_imenik.izbrisi_kontakt_po_priimku(priimek)
-    if uspeh == model.KONTAKT_NE_OBSTAJA:
+    if uspeh == model_za_text_vmesnik.KONTAKT_NE_OBSTAJA:
         print(napaka)
-    elif uspeh == model.VEC_ISTIH_PRIIMKOV:
+    elif uspeh == model_za_text_vmesnik.VEC_ISTIH_PRIIMKOV:
         ime = vnos_imena().upper()
         uspeh = moj_imenik.izbrisi_kontakt_po_priimku_in_imenu(priimek, ime)
-        if uspeh == model.KONTAKT_NE_OBSTAJA:
+        if uspeh == model_za_text_vmesnik.KONTAKT_NE_OBSTAJA:
             print(napaka)
         else:
             print('Kontakt uspešno izbrisan!\n')

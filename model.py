@@ -106,7 +106,7 @@ class Kontakt:
 
     def kontakti_priimek(self, priimek):
         '''Vrne slovar vseh kontaktov, ki imajo tak priimek'''
-        if priimek is None or priimek == '':
+        if priimek == '':
             return self.podatki
         else:
             slovar = {}
@@ -117,7 +117,7 @@ class Kontakt:
 
     def kontakti_ime(self, ime, slovar):
         '''Vrne slovar vseh kontaktov, ki imajo tako ime (in priimek od prej)'''
-        if ime is None or ime == '':
+        if ime == '':
             return slovar
         else:
             slovarcek = {}
@@ -127,9 +127,11 @@ class Kontakt:
             return slovarcek
 
     def poisci_kontakt(self, priimek, ime, stevilka):
+        if priimek + ime + stevilka == '':
+            return PRAZNO
         kontakti_s_tem_priimkom = self.kontakti_priimek(priimek)
         kontakti_s_tem_priimkom_in_imenom = self.kontakti_ime(ime, kontakti_s_tem_priimkom)
-        if stevilka is None or stevilka == '':
+        if stevilka == '':
             return kontakti_s_tem_priimkom_in_imenom
         else:
             slovar = {}

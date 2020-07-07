@@ -111,7 +111,7 @@ def uredi_kontakt(indeks):
     nov_imenik.uredi_kontakt(stevilo, priimek, ime, stevilka, mail, rojdan, opombe)
     bottle.redirect('/')
 
-@bottle.get('/poisci-kontakt/')
+@bottle.post('/poisci-kontakt/')
 def poisci_kontakt():
     priimek = bottle.request.forms.getunicode('iskanje-priimek')
     ime = bottle.request.forms.getunicode('iskanje-ime')

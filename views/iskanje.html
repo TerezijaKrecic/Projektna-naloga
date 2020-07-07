@@ -4,6 +4,29 @@
 
 % if rezultat == model.KONTAKT_NE_OBSTAJA:
 <p>Kontakt s temi podatki žal ne obstaja. Pojdite nazaj in poskusite še enkrat.</p>
+<form action="/poisci-kontakt/" method="post">
+    Priimek: <input type='text' name='iskanje-priimek'>
+    Ime:<input type='text' name='iskanje-ime'>
+    Telefonska številka:<input type='number' name='iskanje-stevilka'>
+    <button type="submit">Poišči</button>
+</form>
+<br>
+<form action="/" method="get">
+    <button type="submit">Nazaj</button>
+</form>
+
+% elif rezultat == model.PRAZNO:
+<p>Vpiši nekaj!</p>
+<form action="/poisci-kontakt/" method="post">
+    Priimek: <input type='text' name='iskanje-priimek'>
+    Ime:<input type='text' name='iskanje-ime'>
+    Telefonska številka:<input type='number' name='iskanje-stevilka'>
+    <button type="submit">Poišči</button>
+</form>
+<br>
+<form action="/" method="get">
+    <button type="submit">Nazaj</button>
+</form>
 
 % else:
 % for i in rezultat:
@@ -13,6 +36,8 @@
 <p><i>Elektronski naslov: </i>{{ rezultat[i]['mail'] }}</p>
 <p><i>Rojstni dan: </i>{{ rezultat[i]['rojdan'] }}</p>
 <p><i>Opombe: </i>{{ rezultat[i]['opombe'] }}</p>
+<br>
+<br>
 % end
 
 

@@ -92,8 +92,36 @@ class Kontakt:
         self.podatki[indeks]['rojdan'] = rojdan
         self.podatki[indeks]['opombe'] = opombe
 
+    def izbrisi_kontakt(self, indeks):
+        self.podatki.pop(indeks)
+
     def uredi_po_priimkih(self):
-        pass
+        if self.podatki == {}:
+            pass
+        seznam_parov = [] # seznam parov [('novak', 1), ('lokar', 2), ('', 3), ('48', 4)]
+        for i in self.podatki:
+            priimek = self.podatki[i]['priimek']
+            seznam_parov.append((priimek.upper(), i))
+        pari = sorted(seznam_parov) # seznam uredimo po abecedi [('', 3), ('48', 4), ('lokar', 2), ('novak', 1)]
+        slovar = {}
+        for  n, (priimek, indeks) in enumerate(pari):
+            slovar[n + 1] = self.podatki[indeks]
+            self.podatki.pop(indeks)
+        self.podatki = slovar
+        
+    def uredi_po_imenih(self):
+        if self.podatki == {}:
+            pass
+        seznam_parov = []
+        for i in self.podatki:
+            ime = self.podatki[i]['ime']
+            seznam_parov.append((ime.upper(), i))
+        pari = sorted(seznam_parov)
+        slovar = {}
+        for  n, (ime, indeks) in enumerate(pari):
+            slovar[n + 1] = self.podatki[indeks]
+            self.podatki.pop(indeks)
+        self.podatki = slovar
 
     def stevilke_v_imeniku(self):
         return [self.podatki[i]['stevilka'] for i in self.podatki.keys()]
@@ -111,7 +139,7 @@ class Kontakt:
         else:
             slovar = {}
             for i in self.podatki:
-                if self.podatki[i]['priimek'] == priimek:
+                if self.podatki[i]['priimek'].upper() == priimek:
                     slovar[i] = self.podatki[i]
             return slovar
 
@@ -122,13 +150,15 @@ class Kontakt:
         else:
             slovarcek = {}
             for i in slovar:
-                if slovar[i]['ime'] == ime:
+                if slovar[i]['ime'].upper() == ime:
                     slovarcek[i] = slovar[i]
             return slovarcek
 
     def poisci_kontakt(self, priimek, ime, stevilka):
         if priimek + ime + stevilka == '':
             return PRAZNO
+        ime = ime.upper()
+        priimek = priimek.upper()
         kontakti_s_tem_priimkom = self.kontakti_priimek(priimek)
         kontakti_s_tem_priimkom_in_imenom = self.kontakti_ime(ime, kontakti_s_tem_priimkom)
         if stevilka == '':

@@ -89,8 +89,7 @@ def dodaj_kontakt():
 
 @bottle.post('/izbrisi-kontakt<indeks>/')
 def izbrisi_kontakt(indeks):
-    slovar_podatkov = nov_imenik.slovar_s_podatki()
-    slovar_podatkov.pop(int(indeks))
+    nov_imenik.izbrisi_kontakt(int(indeks))
     nov_imenik.uredi_indekse()
     bottle.redirect('/')
 
@@ -122,6 +121,11 @@ def poisci_kontakt():
 @bottle.post("/uredi-kontakte-po-priimkih/")
 def uredi_po_priimkih():
     nov_imenik.uredi_po_priimkih()
+    bottle.redirect('/')
+
+@bottle.post("/uredi-kontakte-po-imenih/")
+def uredi_po_imenih():
+    nov_imenik.uredi_po_imenih()
     bottle.redirect('/')
 
 bottle.run(debug=True, reloader=True)

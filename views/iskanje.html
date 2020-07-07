@@ -3,7 +3,7 @@
 % rebase('base.html')
 
 % if rezultat == model.KONTAKT_NE_OBSTAJA:
-<p>Kontakt s temi podatki žal ne obstaja. Pojdite nazaj in poskusite še enkrat.</p>
+<p>Kontakt s temi podatki žal ne obstaja. Pojdite nazaj ali poskusite še enkrat.</p>
 <form action="/poisci-kontakt/" method="post">
     Priimek: <input type='text' name='iskanje-priimek'>
     Ime:<input type='text' name='iskanje-ime'>
@@ -29,12 +29,14 @@
 </form>
 
 % else:
+<p>Število najdenih kontaktov: {{ len(rezultat) }}</p>
+<br>
 % for i in rezultat:
-<p><i>Priimek: </i>{{ rezultat[i]['priimek'] }}</p>
-<p><i>Ime: </i>{{ rezultat[i]['ime'] }}</p>
-<p><i>Telefonska številka: </i>{{ rezultat[i]['stevilka'] }}</p>
-<p><i>Elektronski naslov: </i>{{ rezultat[i]['mail'] }}</p>
-<p><i>Rojstni dan: </i>{{ rezultat[i]['rojdan'] }}</p>
+<p><i>Priimek: </i><b>{{ rezultat[i]['priimek'] }}</b></p>
+<p><i>Ime: </i><b>{{ rezultat[i]['ime'] }}</b></p>
+<p><i>Telefonska številka: </i><b>{{ rezultat[i]['stevilka'] }}</b></p>
+<p><i>Elektronski naslov: </i><b>{{ rezultat[i]['mail'] }}</b></p>
+<p><i>Rojstni dan: </i><b>{{ rezultat[i]['rojdan'] }}</b></p>
 <p><i>Opombe: </i>{{ rezultat[i]['opombe'] }}</p>
 <br>
 <br>

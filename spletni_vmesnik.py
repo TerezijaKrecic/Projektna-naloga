@@ -2,7 +2,6 @@ import bottle
 from model import Uporabnik, Kontakt
 import os
 import hashlib
-import random
 
 uporabniki = {}
 skrivnost = 'Secret'
@@ -28,17 +27,12 @@ nov_imenik = Kontakt()
 
 @bottle.get('/')
 def zacetna_stran():
-    bottle.redirect('/imenik/')
+    bottle.redirect('/imenik/') # zaenkrat, potem ko use uštimaš preusmeriš na /prijava/
 
 @bottle.get('/imenik/')
 def nacrtovanje_imenika():
     slovar_podatkov = nov_imenik.slovar_s_podatki()
     return bottle.template('imenik.html', imenik=slovar_podatkov)
-
-# @bottle.get('/imenik/')
-# def nacrtovanje_imenika():
-#     imenik = imenik_uporabnika()
-#     return bottle.template('imenik.html', imenik=imenik)
 
 # @bottle.get('/prijava/')
 # def prijava_get():
@@ -85,13 +79,13 @@ def dodaj_kontakt():
     rojdan = bottle.request.forms.getunicode('rojdan')
     opomba = bottle.request.forms.getunicode('opombe')
     nov_imenik.dodaj_kontakt(priimek, ime, stevilka, mail, rojdan, opomba)
-    bottle.redirect('/')
+    bottle.redirect('/imenik/')
 
 @bottle.post('/izbrisi-kontakt<indeks>/')
 def izbrisi_kontakt(indeks):
     nov_imenik.izbrisi_kontakt(int(indeks))
     nov_imenik.uredi_indekse()
-    bottle.redirect('/')
+    bottle.redirect('/imenik/')
 
 @bottle.get('/uredi-kontakt<indeks>/')
 def uredi_kontakt(indeks):
@@ -108,7 +102,7 @@ def uredi_kontakt(indeks):
     opombe = bottle.request.forms.getunicode('opombe')
     stevilo = int(indeks)
     nov_imenik.uredi_kontakt(stevilo, priimek, ime, stevilka, mail, rojdan, opombe)
-    bottle.redirect('/')
+    bottle.redirect('/imenik/')
 
 @bottle.post('/poisci-kontakt/')
 def poisci_kontakt():
@@ -121,11 +115,11 @@ def poisci_kontakt():
 @bottle.post("/uredi-kontakte-po-priimkih/")
 def uredi_po_priimkih():
     nov_imenik.uredi_po_priimkih()
-    bottle.redirect('/')
+    bottle.redirect('/imenik/')
 
 @bottle.post("/uredi-kontakte-po-imenih/")
 def uredi_po_imenih():
     nov_imenik.uredi_po_imenih()
-    bottle.redirect('/')
+    bottle.redirect('/imenik/')
 
 bottle.run(debug=True, reloader=True)

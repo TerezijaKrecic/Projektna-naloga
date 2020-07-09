@@ -154,6 +154,12 @@ class Kontakt:
                     slovarcek[i] = slovar[i]
             return slovarcek
 
+    def ali_je_prazen(self, slovar):
+        if slovar == {}:
+            return KONTAKT_NE_OBSTAJA
+        else:
+            return slovar
+
     def poisci_kontakt(self, priimek, ime, stevilka):
         if priimek + ime + stevilka == '':
             return PRAZNO
@@ -162,19 +168,13 @@ class Kontakt:
         kontakti_s_tem_priimkom = self.kontakti_priimek(priimek)
         kontakti_s_tem_priimkom_in_imenom = self.kontakti_ime(ime, kontakti_s_tem_priimkom)
         if stevilka == '':
-            if kontakti_s_tem_priimkom_in_imenom == {}:
-                return KONTAKT_NE_OBSTAJA
-            else:
-                return kontakti_s_tem_priimkom_in_imenom
+            return self.ali_je_prazen(kontakti_s_tem_priimkom_in_imenom)
         else:
             slovar = {}
             for i in kontakti_s_tem_priimkom_in_imenom:
                 if kontakti_s_tem_priimkom_in_imenom[i]['stevilka'] == stevilka:
                     slovar[i] = kontakti_s_tem_priimkom_in_imenom[i]
-            if slovar == {}:
-                return KONTAKT_NE_OBSTAJA
-            else:
-                return slovar
+            return self.ali_je_prazen(slovar)
 
     def slovar_s_podatki(self):
         return self.podatki

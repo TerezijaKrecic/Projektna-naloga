@@ -162,7 +162,10 @@ class Kontakt:
         kontakti_s_tem_priimkom = self.kontakti_priimek(priimek)
         kontakti_s_tem_priimkom_in_imenom = self.kontakti_ime(ime, kontakti_s_tem_priimkom)
         if stevilka == '':
-            return kontakti_s_tem_priimkom_in_imenom
+            if kontakti_s_tem_priimkom_in_imenom == {}:
+                return KONTAKT_NE_OBSTAJA
+            else:
+                return kontakti_s_tem_priimkom_in_imenom
         else:
             slovar = {}
             for i in kontakti_s_tem_priimkom_in_imenom:

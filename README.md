@@ -26,9 +26,9 @@ precej osnoven in ne shranjuje stanja, ko odideš iz njega. V njem ima uporabnik
 Shranjevanje kontaktov
 ----------
 
-Za vsakega uporabnika se ustvari svoja datoteka z imenom <i>uporabnisko_ime</i>.json,
+Za vsakega uporabnika se ustvari svoja datoteka z imenom '<uporabnisko_ime.json>',
 ki izgleda nekako takole:
-<i>
+'''
     {
         "uporabnisko_ime": "uporabnisko_ime",
         "zasifrirano_geslo": "zasifriran_niz",
@@ -51,4 +51,4 @@ ki izgleda nekako takole:
             }
         }
     }
-</i>
+'''

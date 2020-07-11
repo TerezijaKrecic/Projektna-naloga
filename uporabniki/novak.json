@@ -1,0 +1,22 @@
+{
+    "uporabnisko_ime": "novak",
+    "zasifrirano_geslo": "e3a49ef63ac80f5ad9e3bb14123a8bc5da5f7f509c8ee9119b4005e934e324cfe89ce8115edbe2eb47ca62fd37cc374266687ea323dc49e25b2d606415b913ec",
+    "podatki": {
+        "1": {
+            "priimek": "Kreèiè",
+            "ime": "Ana",
+            "stevilka": "15641654",
+            "mail": "",
+            "rojdan": "1997-04-15",
+            "opombe": ""
+        },
+        "2": {
+            "priimek": "Colja",
+            "ime": "Jože",
+            "stevilka": "4564",
+            "mail": "",
+            "rojdan": "",
+            "opombe": ""
+        }
+    }
+}

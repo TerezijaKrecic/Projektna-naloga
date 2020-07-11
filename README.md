@@ -29,26 +29,28 @@ Shranjevanje kontaktov
 Za vsakega uporabnika se ustvari svoja datoteka z imenom <i>uporabnisko_ime</i>.json,
 ki izgleda nekako takole:
 <i>
+'
 {
-    "uporabnisko_ime": "uporabnisko_ime",
-    "zasifrirano_geslo": "zasifriran_niz",
-    "podatki": {
-        "1": {
-            "priimek": "priimek1",
-            "ime": "ime1",
-            "stevilka": "stevilka1",
-            "mail": "elektronski_naslov1",
-            "rojdan": "datum_rojstva1",
-            "opombe": "opombe1"
-        },
-        "2": {
-            "priimek": "priimek2",
-            "ime": "ime2",
-            "stevilka": "stevilka2",
-            "mail": "elektronski_naslov2",
-            "rojdan": "datum_rojstva2",
-            "opombe": "opombe2"
-        }
-    }
+    "uporabnisko_ime": "uporabnisko_ime",
+    "zasifrirano_geslo": "zasifriran_niz",
+    "podatki": {
+        "1": {
+            "priimek": "priimek1",
+            "ime": "ime1",
+            "stevilka": "stevilka1",
+            "mail": "elektronski_naslov1",
+            "rojdan": "datum_rojstva1",
+            "opombe": "opombe1"
+        },
+        "2": {
+            "priimek": "priimek2",
+            "ime": "ime2",
+            "stevilka": "stevilka2",
+            "mail": "elektronski_naslov2",
+            "rojdan": "datum_rojstva2",
+            "opombe": "opombe2"
+        }
+    }
 }
+'
 </i>

@@ -7,6 +7,12 @@ Osebni imenik
 Osnovni cilj naloge je bil napisati program, ki več uporabnikom omogoča
 dostop do osebne kontaktne knjige z uporabo uporabniškega imena in gesla.
 
+Ob prvi prijavi se mora uporabnik registrirati, pri čemer ne sme vpisati
+uporabniškega imena, ki je že uporabljeno.
+
+Pri vsakem vpisu se ustvari nova _json_ datoteka, v kateri so shranjeni uporabnikovi
+podatki - uporabniško ime, zašifrirano geslo ter slovar kontaktov.
+
 Po vpisu ima uporabnik na voljo:
 * vpisati podatke za nov kontakt (pri tem je obvezen vpis telefonske številke)
 * urejanje kontakta
@@ -14,39 +20,15 @@ Po vpisu ima uporabnik na voljo:
 * urejanje seznama kontaktov po priimkih in po imenih
 * iskanje kontakta (s ključi 'ime', 'priimek' in 'telefonska številka')
 
+Ko uporabnik konča z opravili, se lahko odjavi in zapre program.
+
 Poleg spletnega vmesnika je na voljo tudi tekstovni vmesnik skupaj z modelom, ki se
 za tekstovni vmesnik razlikuje od tistega kot za spletni vmesnik, saj je tekstovni vmesnik
-precej osnoven in ne shranjuje stanja, ko odideš iz njega. V njem ima uporabnik na voljo:
+precej osnoven in ne shranjuje stanja, ko odideš iz njega. Razlog za to je osredotočenost
+na spletni vmesnik - tekstovni vmesnik je bil le opora pri izbiri funkcij.  
+V njem ima uporabnik na voljo:
 * vpisati podatke za kontakt (priimek in številka obvezna)
 * izpisati slovar kontaktov
 * izbrisati kontakt
 * poiskati kontakt
 * urediti kontakt (ta funkcija ni dodelana)
-
-Shranjevanje kontaktov
-----------
-
-Za vsakega uporabnika se ustvari svoja datoteka z imenom 'uporabnisko_ime.json',
-ki izgleda nekako takole:
-    {
-        "uporabnisko_ime": "uporabnisko_ime",
-        "zasifrirano_geslo": "zasifriran_niz",
-        "podatki": {
-            "1": {
-                "priimek": "priimek1",
-                "ime": "ime1",
-                "stevilka": "stevilka1",
-                "mail": "elektronski_naslov1",
-                "rojdan": "datum_rojstva1",
-                "opombe": "opombe1"
-            },
-            "2": {
-                "priimek": "priimek2",
-                "ime": "ime2",
-                "stevilka": "stevilka2",
-                "mail": "elektronski_naslov2",
-                "rojdan": "datum_rojstva2",
-                "opombe": "opombe2"
-            }
-        }
-    }

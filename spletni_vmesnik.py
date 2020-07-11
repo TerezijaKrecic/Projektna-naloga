@@ -13,8 +13,6 @@ for ime_datoteke in os.listdir('uporabniki'):
 
 def trenutni_uporabnik():
     uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=skrivnost)
-    if uporabnisko_ime is None:
-        bottle.redirect('/prijava/')
     return uporabniki[uporabnisko_ime] # dobimo razred Uporabnik, ki vsebuje ime in geslo in (na začetku prazen) Kontakt()
 
 def imenik_uporabnika():

@@ -24,14 +24,13 @@ class Uporabnik:
         with open(ime_datoteke, 'w') as datoteka:
             json.dump(slovar_stanja, datoteka, ensure_ascii=False, indent=4)
 
-    @classmethod
-    def nalozi_stanje(cls, ime_datoteke):
+    def nalozi_stanje(ime_datoteke):
         with open(ime_datoteke) as datoteka:
             slovar_stanja = json.load(datoteka)
         uporabnisko_ime = slovar_stanja['uporabnisko_ime']
         zasifrirano_geslo = slovar_stanja['zasifrirano_geslo']
-        kontakti = slovar_stanja['podatki']
-        return cls(uporabnisko_ime, zasifrirano_geslo, kontakti)
+        kontakti = Kontakt(slovar_stanja['podatki']) # tu mora biti Kontakt(), če ne dobimo seznam in ne razreda
+        return Uporabnik(uporabnisko_ime, zasifrirano_geslo, kontakti)
 
 # slovar_stanja bo slovar, katerega ključi so imena podatkov, vrednosti pa tistih 5 podatkov
 #
@@ -48,8 +47,8 @@ class Uporabnik:
 # }
 
 class Kontakt:
-    def __init__(self):
-        self.podatki = {}
+    def __init__(self, podatki=None):
+        self.podatki = {} if podatki is None else podatki
 
     def nov_indeks(self):
         if self.podatki == {}:

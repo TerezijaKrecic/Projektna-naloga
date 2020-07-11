@@ -22,8 +22,6 @@ def shrani_trenutnega_uporabnika():
     uporabnik = trenutni_uporabnik()
     uporabnik.shrani_stanje(os.path.join('uporabniki', f'{uporabnik.uporabnisko_ime}.json'))
 
-
-
 @bottle.get('/')
 def zacetna_stran():
     bottle.redirect('/prijava/')
@@ -77,7 +75,8 @@ def registracija_post():
 @bottle.get('/imenik/')
 def nacrtovanje_imenika():
     slovar_podatkov = imenik_uporabnika().podatki
-    return bottle.template('imenik.html', imenik=slovar_podatkov)
+    ime = trenutni_uporabnik().uporabnisko_ime
+    return bottle.template('imenik.html', imenik=slovar_podatkov, ime=ime)
 
 @bottle.post('/odjava/')
 def odjava():
@@ -99,7 +98,7 @@ def dodaj_kontakt():
 
 @bottle.post('/izbrisi-kontakt<indeks>/')
 def izbrisi_kontakt(indeks):
-    imenik_uporabnika().izbrisi_kontakt(int(indeks))
+    imenik_uporabnika().izbrisi_kontakt(indeks)
     imenik_uporabnika().uredi_indekse()
     bottle.redirect('/imenik/')
 
@@ -107,7 +106,7 @@ def izbrisi_kontakt(indeks):
 def uredi_kontakt(indeks):
     slovar_podatkov = imenik_uporabnika().podatki
     shrani_trenutnega_uporabnika()
-    return bottle.template('uredi_kontakt.html', imenik=slovar_podatkov, indeks=int(indeks))
+    return bottle.template('uredi_kontakt.html', imenik=slovar_podatkov, indeks=indeks)
 
 @bottle.post('/uredi-kontakt<indeks>/')
 def uredi_kontakt(indeks):
@@ -117,7 +116,7 @@ def uredi_kontakt(indeks):
     mail = bottle.request.forms.getunicode('mail')
     rojdan = bottle.request.forms.getunicode('rojdan')
     opombe = bottle.request.forms.getunicode('opombe')
-    stevilo = int(indeks)
+    stevilo = indeks
     imenik_uporabnika().uredi_kontakt(stevilo, priimek, ime, stevilka, mail, rojdan, opombe)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/imenik/')

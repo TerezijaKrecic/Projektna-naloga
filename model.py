@@ -21,11 +21,11 @@ class Uporabnik:
             'zasifrirano_geslo': self.zasifrirano_geslo,
             'podatki': self.kontakti.podatki
         }
-        with open(ime_datoteke, 'w') as datoteka:
+        with open(ime_datoteke, 'w', encoding='utf-8') as datoteka:
             json.dump(slovar_stanja, datoteka, ensure_ascii=False, indent=4)
 
     def nalozi_stanje(ime_datoteke):
-        with open(ime_datoteke) as datoteka:
+        with open(ime_datoteke, encoding='utf-8') as datoteka:
             slovar_stanja = json.load(datoteka)
         uporabnisko_ime = slovar_stanja['uporabnisko_ime']
         zasifrirano_geslo = slovar_stanja['zasifrirano_geslo']

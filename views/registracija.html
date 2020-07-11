@@ -1,0 +1,12 @@
+% rebase('base.html')
+
+<h3>Registracija</h3>
+<p>{{ obvestilo }}</p>
+
+<br>
+
+<form action="/registracija/" method="post">
+    Uporabniško ime: <input type='text' name='uporabnisko_ime' required>
+    Geslo: <input type='password' name='geslo' required>
+    <button type="submit">Registriraj se</button>
+  </form>

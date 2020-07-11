@@ -1,25 +1,20 @@
 % rebase('base.html')
 
-<p>Pozdravljeni v tem programu. Če že imate svoje uporabniško ime in geslo, se vpišite.
-    V nasprotnem primeru se registrirajte.
-</p>
+<h3>Vpis:</h3>
+<p>{{ obvestilo }}</p>
 
-<p>Vpis:</p>
 <br>
+
 <form action="/prijava/" method="post">
-    Uporabniško ime: <input type='text' name='uporabnisko_ime'>
-    Geslo: <input type='password' name='geslo'>
+    Uporabniško ime: <input type='text' name='uporabnisko_ime' required>
+    Geslo: <input type='password' name='geslo' required>
     <button type="submit">Vpiši se</button>
   </form>
 
 <br>
 <br>
-<br>
 
-<p>Registriracija:</p>
-<br>
-<form action="/prijava/" method="post">
-    Uporabniško ime: <input type='text' name='uporabnisko_ime'>
-    Geslo: <input type='password' name='geslo'>
-    <button type="submit">Registriraj se</button>
-  </form>
+<p>Nimate osebnega računa?</p>
+<form action="/registracija/" method="get">
+  <button type="submit">Registracija</button>
+</form>

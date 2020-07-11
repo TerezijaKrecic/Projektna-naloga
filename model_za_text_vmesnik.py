@@ -4,8 +4,6 @@ import random
 VEC_ISTIH_PRIIMKOV = 'V'
 KONTAKT_NE_OBSTAJA = 'N'
 
-DATOTEKA_STANJE = 'stanje.json'
-
 class Kontakt:
     def __init__(self):
         self.podatki = {}

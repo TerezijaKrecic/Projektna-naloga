@@ -1,27 +1,25 @@
 import json
-import random
 
 VEC_ISTIH_PRIIMKOV = 'V'
 KONTAKT_NE_OBSTAJA = 'N'
 PRAZNO = 'Vpišite nekaj!'
-
-DATOTEKA_STANJE = 'stanje.json'
+NAPACNO_GESLO = 'napaka'
 
 class Uporabnik:
-    def __init__(self, uporabnisko_ime, zasifrirano_geslo, podatki):
+    def __init__(self, uporabnisko_ime, zasifrirano_geslo, kontakti):
         self.uporabnisko_ime = uporabnisko_ime
         self.zasifrirano_geslo = zasifrirano_geslo
-        self.podatki = podatki
+        self.kontakti = kontakti # to je razred Kontakt()
     
     def preveri_geslo(self, zasifrirano_geslo):
         if self.zasifrirano_geslo != zasifrirano_geslo:
-            raise ValueError('Geslo je napačno!')
+            return NAPACNO_GESLO
     
-    def shrani_stanje(self, ime_datoteke):
+    def shrani_stanje(self, ime_datoteke): #ime datoteke je uporabniško_ime.json
         slovar_stanja = {
             'uporabnisko_ime': self.uporabnisko_ime,
             'zasifrirano_geslo': self.zasifrirano_geslo,
-            'podatki': self.kontakt.slovar_s_podatki()
+            'podatki': self.kontakti.podatki
         }
         with open(ime_datoteke, 'w') as datoteka:
             json.dump(slovar_stanja, datoteka, ensure_ascii=False, indent=4)
@@ -32,8 +30,8 @@ class Uporabnik:
             slovar_stanja = json.load(datoteka)
         uporabnisko_ime = slovar_stanja['uporabnisko_ime']
         zasifrirano_geslo = slovar_stanja['zasifrirano_geslo']
-        podatki = slovar_stanja['podatki']
-        return cls(uporabnisko_ime, zasifrirano_geslo, podatki)
+        kontakti = slovar_stanja['podatki']
+        return cls(uporabnisko_ime, zasifrirano_geslo, kontakti)
 
 # slovar_stanja bo slovar, katerega ključi so imena podatkov, vrednosti pa tistih 5 podatkov
 #
@@ -175,14 +173,3 @@ class Kontakt:
                 if kontakti_s_tem_priimkom_in_imenom[i]['stevilka'] == stevilka:
                     slovar[i] = kontakti_s_tem_priimkom_in_imenom[i]
             return self.ali_je_prazen(slovar)
-
-    def slovar_s_podatki(self):
-        return self.podatki
-
-    # def shrani_stanje(self, ime_datoteke):
-    #     with open(ime_datoteke, 'w') as datoteka:
-    #         json.dump(self.slovar_s_podatki(), datoteka, ensure_ascii=False, indent=4)
-
-    # def nalozi_stanje(self, ime_datoteke):
-    #     with open(self.datoteka_s_stanjem, 'r', encoding='utf-8') as f:
-    #         self.podatki = json.load(f)

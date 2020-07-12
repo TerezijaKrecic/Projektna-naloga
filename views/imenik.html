@@ -2,34 +2,38 @@
 
 % rebase('base.html', izbrani_zavihek='poglej-imenik')
 
-<p class="subtitle">Tu so tvoji shranjeni kontakti:</p>
+<table>
+  <tr>
+    <td>
+      <form action="/uredi-kontakte-po-priimkih/" method="post">
+        <button type="submit" class="button has-text-link">Uredi po priimkih</button>
+      </form>
+    </td>
+    <td>
+      <form action="/uredi-kontakte-po-imenih/" method="post">
+        <button type="submit" class="button has-text-link">Uredi po imenih</button>
+      </form>
+    </td>
+  </tr>
+</table>
 
 <br>
-
-<form action="/uredi-kontakte-po-priimkih/" method="post">
-  <button type="submit">Uredi po priimkih</button>
-</form>
-
-<form action="/uredi-kontakte-po-imenih/" method="post">
-  <button type="submit">Uredi po imenih</button>
-</form>
-
 <br>
-<br>
-<table border="1" style="border-collapse: collapse">
+
+<table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th>Indeks</th>
-      <th style="width: 100pt">PRIIMEK</th>
-      <th style="width: 100pt">IME</th>
-      <th style="width: 100pt">ŠTEVILKA</th>
-      <th style="width: 100pt">e-mail</th>
-      <th style="width: 100pt">ROJSTNI DAN</th>
-      <th style="width: 100pt">OPOMBE</th>
+      <th>Št.</th>
+      <th>PRIIMEK</th>
+      <th>IME</th>
+      <th>ŠTEVILKA</th>
+      <th>e-mail</th>
+      <th>ROJSTNI DAN</th>
+      <th>OPOMBE</th>
     </tr>
   </thead>
   <tbody>
-% for indeks in imenik:
+    % for indeks in imenik:
     <tr>
       <td>{{ indeks }}</td>
       <td>{{ imenik[indeks]['priimek'] }}</td>
@@ -49,7 +53,6 @@
         </form>
       </td>
     </tr>
-
-% end
+    % end
   </tbody>
 </table>

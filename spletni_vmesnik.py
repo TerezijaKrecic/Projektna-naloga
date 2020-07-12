@@ -73,9 +73,8 @@ def registracija_post():
 @bottle.get('/imenik/')
 def nacrtovanje_imenika():
     slovar_podatkov = imenik_uporabnika().podatki
-    ime = trenutni_uporabnik().uporabnisko_ime
     shrani_trenutnega_uporabnika()
-    return bottle.template('imenik.html',imenik=slovar_podatkov, ime=ime)
+    return bottle.template('imenik.html',imenik=slovar_podatkov)
 
 @bottle.get("/poglej-imenik/")
 def imenik():

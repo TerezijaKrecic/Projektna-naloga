@@ -59,7 +59,8 @@ class Kontakt:
             vsota = 0
             for slovar in self.podatki:
                 vsota += 1
-            return vsota + 1
+            indeks = vsota + 1
+            return str(indeks)
 
     def dodaj_kontakt(self, priimek, ime, stevilka, posta, roj_dan, opombe):
         self.podatki[self.nov_indeks()] = {
@@ -104,7 +105,7 @@ class Kontakt:
         pari = sorted(seznam_parov) # seznam uredimo po abecedi [('', 3), ('48', 4), ('lokar', 2), ('novak', 1)]
         slovar = {}
         for  n, (priimek, indeks) in enumerate(pari):
-            slovar[n + 1] = self.podatki[indeks]
+            slovar[str(n + 1)] = self.podatki[indeks]
             self.podatki.pop(indeks)
         self.podatki = slovar
         
@@ -118,7 +119,7 @@ class Kontakt:
         pari = sorted(seznam_parov)
         slovar = {}
         for  n, (ime, indeks) in enumerate(pari):
-            slovar[n + 1] = self.podatki[indeks]
+            slovar[str(n + 1)] = self.podatki[indeks]
             self.podatki.pop(indeks)
         self.podatki = slovar
 

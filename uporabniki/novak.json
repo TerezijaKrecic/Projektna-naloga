@@ -3,43 +3,59 @@
     "zasifrirano_geslo": "e3a49ef63ac80f5ad9e3bb14123a8bc5da5f7f509c8ee9119b4005e934e324cfe89ce8115edbe2eb47ca62fd37cc374266687ea323dc49e25b2d606415b913ec",
     "podatki": {
         "1": {
-            "priimek": "Krecic",
-            "ime": "",
-            "stevilka": "4864",
+            "priimek": "Felič",
+            "ime": "Andrej",
+            "stevilka": "23123",
             "mail": "",
             "rojdan": "",
-            "opombe": ""
+            "opombe": "cudno"
         },
         "2": {
-            "priimek": "Lokar",
-            "ime": "Ana",
-            "stevilka": "16161651651",
+            "priimek": "",
+            "ime": "Janez",
+            "stevilka": "1564",
             "mail": "",
             "rojdan": "",
             "opombe": ""
         },
         "3": {
-            "priimek": "Felič",
-            "ime": "Andrej",
-            "stevilka": "45",
+            "priimek": "",
+            "ime": "janez",
+            "stevilka": "25415",
             "mail": "",
             "rojdan": "",
             "opombe": ""
         },
         "4": {
-            "priimek": "Novak",
-            "ime": "Janez",
-            "stevilka": "040123123",
-            "mail": "novak.janez@gmail.com",
-            "rojdan": "1996-02-15",
+            "priimek": "Kole",
+            "ime": "janez",
+            "stevilka": "45",
+            "mail": "",
+            "rojdan": "",
             "opombe": ""
         },
         "5": {
-            "priimek": "Plejič",
-            "ime": "Lojze",
-            "stevilka": "156915",
+            "priimek": "Krečič",
+            "ime": "Janez",
+            "stevilka": "456456",
             "mail": "",
             "rojdan": "",
+            "opombe": ""
+        },
+        "6": {
+            "priimek": "Žele",
+            "ime": "Janez",
+            "stevilka": "45345",
+            "mail": "",
+            "rojdan": "",
+            "opombe": ""
+        },
+        "7": {
+            "priimek": "Ambrož",
+            "ime": "Žan",
+            "stevilka": "45645",
+            "mail": "ambrozko.zanko@outlook.com",
+            "rojdan": "1999-06-15",
             "opombe": ""
         }
     }

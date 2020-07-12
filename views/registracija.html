@@ -1,12 +1,39 @@
-% rebase('base.html')
+  % import model
 
-<h3>Registracija</h3>
-<p>{{ obvestilo }}</p>
-
-<br>
-
-<form action="/registracija/" method="post">
-    Uporabniško ime: <input type='text' name='uporabnisko_ime' required>
-    Geslo: <input type='password' name='geslo' required>
-    <button type="submit">Registriraj se</button>
-  </form>
+  % rebase('base.html')
+  
+  % if obvestilo == model.UPORABNISKO_IME_ZE_OBSTAJA:
+  <section class="hero is-warning is-fullheight">
+  % else:
+    <section class="hero is-success is-fullheight">
+  %end
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-4 is-offset-4">
+            <h3 class="title has-text-black">Registracija</h3>
+            <hr class="login-hr">
+            % if obvestilo is None:
+            <p></p>
+            %else:
+            <p class="subtitle">{{ obvestilo }}</p>
+            %end
+            <br>
+            <div class="box">
+            <form action="/registracija/" method="post">
+              <div class="field">
+                <div class="control">
+                  <input class="input" type='text' name='uporabnisko_ime' required placeholder="Uporabnisko ime" autofocus="">
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <input class="input" type='password' name='geslo' required placeholder="Geslo">
+                </div>
+              </div>            
+              <button type="submit" class="button is-block is-info is-fullwidth">Registriraj se <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+            </form>  
+            </div>     
+        </div>
+      </div>
+    </div>
+  </section>

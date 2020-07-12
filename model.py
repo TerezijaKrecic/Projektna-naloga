@@ -3,7 +3,9 @@ import json
 VEC_ISTIH_PRIIMKOV = 'V'
 KONTAKT_NE_OBSTAJA = 'N'
 PRAZNO = 'Vpišite nekaj!'
-NAPACNO_GESLO = 'napaka'
+NAPACNO_GESLO = 'Geslo je napačno. Poskusite znova:'
+UPORABNISKO_IME_NE_OBSTAJA = 'Uporabniško ime ne obstaja. Poskusite še enkrat:'
+UPORABNISKO_IME_ZE_OBSTAJA = 'To uporabniško ime že obstaja. Uporabite drugo ime.'
 
 class Uporabnik:
     def __init__(self, uporabnisko_ime, zasifrirano_geslo, kontakti):

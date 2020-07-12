@@ -1,20 +1,46 @@
+% import model
+
 % rebase('base.html')
 
-<h3>Vpis:</h3>
-<p>{{ obvestilo }}</p>
+% if obvestilo == model.UPORABNISKO_IME_NE_OBSTAJA:
+<section class="hero is-warning is-fullheight">
+% elif obvestilo == model.NAPACNO_GESLO:
+<section class="hero is-danger is-fullheight">
+% else:
+  <section class="hero is-success is-fullheight">
+%end
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="column is-4 is-offset-4">
+          <h3 class="title has-text-black">Vpis</h3>
+          <hr class="login-hr">
+          % if obvestilo is None:
+          <p></p>
+          %else:
+          <p class="subtitle">{{ obvestilo }}</p>
+          %end
+          <br>
+          <div class="box">
+          <form action="/prijava/" method="post">
+            <div class="field">
+              <div class="control">
+                <input class="input" type='text' name='uporabnisko_ime' required placeholder="Uporabnisko ime" autofocus="">
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input class="input" type='password' name='geslo' required placeholder="Geslo">
+              </div>
+            </div>            
+            <button type="submit" class="button is-block is-info is-fullwidth">Vpiši se <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+          </form>  
+          </div>
+          <p class="has-text-grey">
+            <a href="/registracija/">Registriraj se</a>
+          </p>     
+      </div>
+    </div>
+  </div>
+</section>
 
-<br>
 
-<form action="/prijava/" method="post">
-    Uporabniško ime: <input type='text' name='uporabnisko_ime' required>
-    Geslo: <input type='password' name='geslo' required>
-    <button type="submit">Vpiši se</button>
-  </form>
-
-<br>
-<br>
-
-<p>Nimate osebnega računa?</p>
-<form action="/registracija/" method="get">
-  <button type="submit">Registracija</button>
-</form>

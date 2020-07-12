@@ -1,5 +1,5 @@
 import bottle
-from model import Uporabnik, Kontakt, NAPACNO_GESLO
+from model import Uporabnik, Kontakt, NAPACNO_GESLO, UPORABNISKO_IME_NE_OBSTAJA, UPORABNISKO_IME_ZE_OBSTAJA
 import os
 import hashlib
 
@@ -28,14 +28,13 @@ def zacetna_stran():
 
 @bottle.get('/prijava/')
 def prijava_get():
-    pozdrav = 'Pozdravljeni! Za nadaljevanje se vpišite:'
-    return bottle.template('prijava.html', obvestilo=pozdrav)
+    return bottle.template('prijava.html', obvestilo=None)
 
 @bottle.post('/prijava/')
 def prijava_post():
     uporabnisko_ime = bottle.request.forms.getunicode('uporabnisko_ime')
     if uporabnisko_ime not in uporabniki:
-        napaka = 'Uporabniško ime ne obstaja. Poskusite še enkrat:'
+        napaka = UPORABNISKO_IME_NE_OBSTAJA
         return bottle.template('prijava.html', obvestilo=napaka)
     geslo = bottle.request.forms.getunicode('geslo')
     h = hashlib.blake2b()
@@ -43,21 +42,20 @@ def prijava_post():
     zasifrirano_geslo = h.hexdigest()
     uporabnik = uporabniki[uporabnisko_ime]
     if uporabnik.preveri_geslo(zasifrirano_geslo) == NAPACNO_GESLO:
-        napaka = 'Geslo je napačno. Poskusite znova:'
+        napaka = NAPACNO_GESLO
         return bottle.template('prijava.html', obvestilo=napaka)
     bottle.response.set_cookie('uporabnisko_ime', uporabnik.uporabnisko_ime, path='/', secret=skrivnost)
     bottle.redirect('/imenik/')
 
 @bottle.get('/registracija/')
 def registracija_get():
-    pozdrav = 'Pozdravljeni! Za nadaljevanje se registrirajte:'
-    return bottle.template('registracija.html', obvestilo=pozdrav)
+    return bottle.template('registracija.html', obvestilo=None)
 
 @bottle.post('/registracija/')
 def registracija_post():
     uporabnisko_ime = bottle.request.forms.getunicode('uporabnisko_ime')
     if uporabnisko_ime in uporabniki:
-        napaka = 'To uporabniško ime že obstaja. Uporabite drugo ime.'
+        napaka = UPORABNISKO_IME_ZE_OBSTAJA
         return bottle.template('registracija.html', obvestilo=napaka)
     geslo = bottle.request.forms.getunicode('geslo')
     h = hashlib.blake2b()
@@ -76,6 +74,7 @@ def registracija_post():
 def nacrtovanje_imenika():
     slovar_podatkov = imenik_uporabnika().podatki
     ime = trenutni_uporabnik().uporabnisko_ime
+    shrani_trenutnega_uporabnika()
     return bottle.template('imenik.html', imenik=slovar_podatkov, ime=ime)
 
 @bottle.post('/odjava/')

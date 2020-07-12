@@ -2,15 +2,15 @@
 
 % rebase('base.html')
 
-  <h1>Osebni imenik</h1>
+  <h1 class="title">Osebni imenik</h1>
 
-<p>{{ ime }}</p>
+<p class="subtitle">{{ ime }}</p>
 
   <form action="/odjava/" method="post">
     <button type="submit">Odjava</button>
   </form>
 
-  <p>Tu so tvoji shranjeni kontakti:</p>
+  <p class="subtitle">Tu so tvoji shranjeni kontakti:</p>
 
 <table border="1" style="border-collapse: collapse">
   <thead>
@@ -64,7 +64,7 @@
 <br>
 <br>
 
-  <p>In tu dodaš nove kontakte. Obvezno izpolnite polje s telefonsko številko!</p>
+<p class="subtitle">In tu dodaš nove kontakte. Obvezno izpolnite polje s telefonsko številko!</p>
 
   <form action="/dodaj-kontakt/" method="post">
     <table>
@@ -99,7 +99,7 @@
   <br>
   <br>
 
-  <p>Poišči kontakt:</p>
+  <p class="subtitle">Poišči kontakt:</p>
   <form action="/poisci-kontakt/" method="post">
     Priimek: <input type='text' name='iskanje-priimek'>
     Ime: <input type='text' name='iskanje-ime'>

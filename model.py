@@ -37,7 +37,7 @@ class Uporabnik:
 # slovar_stanja bo slovar, katerega ključi so imena podatkov, vrednosti pa tistih 5 podatkov
 #
 # {
-    # 1:
+    # "1":
     #     {
     #         'priimek': 'NOVAK',
     #         'ime': 'JANEZ',
@@ -82,7 +82,7 @@ class Kontakt:
             for n in range(1, len(seznam_indeksov) + 1):
                 kontakt = self.podatki[seznam_indeksov[n - 1]]
                 self.podatki.pop(seznam_indeksov[n - 1])
-                self.podatki[n] = kontakt
+                self.podatki[str(n)] = kontakt
 
     def uredi_kontakt(self, indeks, priimek, ime, stevilka, mail, rojdan, opombe):
         self.podatki[indeks]['priimek'] = priimek

@@ -11,22 +11,6 @@
             "opombe": "cudno"
         },
         "2": {
-            "priimek": "",
-            "ime": "Janez",
-            "stevilka": "1564",
-            "mail": "",
-            "rojdan": "",
-            "opombe": ""
-        },
-        "3": {
-            "priimek": "",
-            "ime": "janez",
-            "stevilka": "25415",
-            "mail": "",
-            "rojdan": "",
-            "opombe": ""
-        },
-        "4": {
             "priimek": "Kole",
             "ime": "janez",
             "stevilka": "45",
@@ -34,23 +18,7 @@
             "rojdan": "",
             "opombe": ""
         },
-        "5": {
-            "priimek": "Krečič",
-            "ime": "Janez",
-            "stevilka": "456456",
-            "mail": "",
-            "rojdan": "",
-            "opombe": ""
-        },
-        "6": {
-            "priimek": "Žele",
-            "ime": "Janez",
-            "stevilka": "45345",
-            "mail": "",
-            "rojdan": "",
-            "opombe": ""
-        },
-        "7": {
+        "3": {
             "priimek": "Ambrož",
             "ime": "Žan",
             "stevilka": "45645",

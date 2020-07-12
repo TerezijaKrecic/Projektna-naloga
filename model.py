@@ -34,7 +34,7 @@ class Uporabnik:
         kontakti = Kontakt(slovar_stanja['podatki']) # tu mora biti Kontakt(), če ne dobimo seznam in ne razreda
         return Uporabnik(uporabnisko_ime, zasifrirano_geslo, kontakti)
 
-# slovar_stanja bo slovar, katerega ključi so imena podatkov, vrednosti pa tistih 5 podatkov
+# slovar_stanja bo slovar, katerega ključi so imena podatkov, vrednosti pa tistih 6 podatkov. Primer:
 #
 # {
     # "1":
@@ -73,7 +73,7 @@ class Kontakt:
         }
 
     def uredi_indekse(self):
-        '''Uredi indekse po vrsti z VSEMI nar. števili od 1 do dolžine slovarja'''
+        '''Uredi indekse po vrsti od 1 do dolžine slovarja'''
         if self.podatki == {}:
             pass
         else:
@@ -85,6 +85,7 @@ class Kontakt:
                 self.podatki[str(n)] = kontakt
 
     def uredi_kontakt(self, indeks, priimek, ime, stevilka, mail, rojdan, opombe):
+        '''Posodobitev podatkov'''
         self.podatki[indeks]['priimek'] = priimek
         self.podatki[indeks]['ime'] = ime
         self.podatki[indeks]['stevilka'] = stevilka
@@ -96,6 +97,7 @@ class Kontakt:
         self.podatki.pop(indeks)
 
     def uredi_po_priimkih(self):
+        '''Slovar kontaktov uredi tako, da si vrednosti ključev sledijo od 1 do n, pri čemer so priimki urejeni po abecedi'''
         if self.podatki == {}:
             pass
         seznam_parov = [] # seznam parov [('novak', 1), ('lokar', 2), ('', 3), ('48', 4)]
@@ -110,6 +112,7 @@ class Kontakt:
         self.podatki = slovar
         
     def uredi_po_imenih(self):
+        '''Slovar kontaktov uredi tako, da si vrednosti ključev sledijo od 1 do n, pri čemer so imena urejena po abecedi'''
         if self.podatki == {}:
             pass
         seznam_parov = []
@@ -161,6 +164,7 @@ class Kontakt:
             return slovar
 
     def poisci_kontakt(self, priimek, ime, stevilka):
+        '''Poisce slovar z vsemi kontakti, ki ustrezajo danim argumentom'''
         if priimek + ime + stevilka == '':
             return PRAZNO
         ime = ime.upper()

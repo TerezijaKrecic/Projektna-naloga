@@ -1,8 +1,17 @@
 % import model
 
-% rebase('base.html')
+% rebase('base.html', izbrani_zavihek='poisci-kontakt')
 
-% if rezultat == model.KONTAKT_NE_OBSTAJA:
+% if rezultat is None:
+<p class="subtitle">Poišči kontakt:</p>
+<form action="/poisci-kontakt/" method="post">
+  Priimek: <input type='text' name='iskanje-priimek'>
+  Ime: <input type='text' name='iskanje-ime'>
+  Telefonska številka: <input type='number' name='iskanje-stevilka'>
+  <button type="submit">Poišči</button>
+</form>
+
+% elif rezultat == model.KONTAKT_NE_OBSTAJA:
 <p>Kontakt s temi podatki žal ne obstaja. Pojdite nazaj ali poskusite še enkrat.</p>
 <form action="/poisci-kontakt/" method="post">
     Priimek: <input type='text' name='iskanje-priimek'>
@@ -11,9 +20,6 @@
     <button type="submit">Poišči</button>
 </form>
 <br>
-<form action="/imenik/" method="get">
-    <button type="submit">Nazaj</button>
-</form>
 
 % elif rezultat == model.PRAZNO:
 <p>Vpiši nekaj!</p>
@@ -24,9 +30,6 @@
     <button type="submit">Poišči</button>
 </form>
 <br>
-<form action="/imenik/" method="get">
-    <button type="submit">Nazaj</button>
-</form>
 
 % else:
 <p>Število najdenih kontaktov: {{ len(rezultat) }}</p>
@@ -41,8 +44,3 @@
 <br>
 <br>
 % end
-
-
-<form action="/imenik/" method="get">
-    <button type="submit">Nazaj</button>
-</form>

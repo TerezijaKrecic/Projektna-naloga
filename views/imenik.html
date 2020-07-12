@@ -1,17 +1,21 @@
 % import model
 
-% rebase('base.html')
+% rebase('base.html', izbrani_zavihek='poglej-imenik')
 
-  <h1 class="title">Osebni imenik</h1>
+<p class="subtitle">Tu so tvoji shranjeni kontakti:</p>
 
-<p class="subtitle">{{ ime }}</p>
+<br>
 
-  <form action="/odjava/" method="post">
-    <button type="submit">Odjava</button>
-  </form>
+<form action="/uredi-kontakte-po-priimkih/" method="post">
+  <button type="submit">Uredi po priimkih</button>
+</form>
 
-  <p class="subtitle">Tu so tvoji shranjeni kontakti:</p>
+<form action="/uredi-kontakte-po-imenih/" method="post">
+  <button type="submit">Uredi po imenih</button>
+</form>
 
+<br>
+<br>
 <table border="1" style="border-collapse: collapse">
   <thead>
     <tr>
@@ -49,60 +53,3 @@
 % end
   </tbody>
 </table>
-
-<br>
-<br>
-
-<form action="/uredi-kontakte-po-priimkih/" method="post">
-  <button type="submit">Uredi po priimkih</button>
-</form>
-
-<form action="/uredi-kontakte-po-imenih/" method="post">
-  <button type="submit">Uredi po imenih</button>
-</form>
-
-<br>
-<br>
-
-<p class="subtitle">In tu dodaš nove kontakte. Obvezno izpolnite polje s telefonsko številko!</p>
-
-  <form action="/dodaj-kontakt/" method="post">
-    <table>
-      <tr>
-        <td><i>Priimek:</i></td>
-        <td><input type="text" name='priimek'></td>
-      </tr>
-      <tr>
-        <td><i>Ime:</i></td>
-        <td><input type='text' name='ime'></td>
-      </tr>
-      <tr>
-        <td><i>Telefonska številka:</i></td>
-        <td><input type='number' name='stevilka' required></td>
-      </tr>
-      <tr>
-        <td><i>Elektronski naslov:</i></td>
-        <td><input type='email' name='mail'></td>
-      </tr>
-      <tr>
-        <td><i>Rojstni dan:</i></td>
-        <td><input type='date' name='rojdan'></td>
-      </tr>
-      <tr>
-        <td><i>Opombe:</i></td>
-        <td><input type='text' name='opombe'></td>
-      </tr>
-    </table>
-    <button type="submit">Dodaj</button>
-  </form>
-
-  <br>
-  <br>
-
-  <p class="subtitle">Poišči kontakt:</p>
-  <form action="/poisci-kontakt/" method="post">
-    Priimek: <input type='text' name='iskanje-priimek'>
-    Ime: <input type='text' name='iskanje-ime'>
-    Telefonska številka: <input type='number' name='iskanje-stevilka'>
-    <button type="submit">Poišči</button>
-  </form>

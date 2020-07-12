@@ -1,0 +1,35 @@
+% import model
+
+% rebase('base.html', izbrani_zavihek='dodaj-kontakt')
+
+<p class="subtitle">Tu dodaš nove kontakte. Obvezno izpolnite polje s telefonsko številko!</p>
+
+<form action="/dodaj-kontakt/" method="post">
+  <table>
+    <tr>
+      <td><i>Priimek:</i></td>
+      <td><input type="text" name='priimek'></td>
+    </tr>
+    <tr>
+      <td><i>Ime:</i></td>
+      <td><input type='text' name='ime'></td>
+    </tr>
+    <tr>
+      <td><i>Telefonska številka:</i></td>
+      <td><input type='number' name='stevilka' required></td>
+    </tr>
+    <tr>
+      <td><i>Elektronski naslov:</i></td>
+      <td><input type='email' name='mail'></td>
+    </tr>
+    <tr>
+      <td><i>Rojstni dan:</i></td>
+      <td><input type='date' name='rojdan'></td>
+    </tr>
+    <tr>
+      <td><i>Opombe:</i></td>
+      <td><input type='text' name='opombe'></td>
+    </tr>
+  </table>
+  <button type="submit">Dodaj</button>
+</form>

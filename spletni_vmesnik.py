@@ -75,13 +75,22 @@ def nacrtovanje_imenika():
     slovar_podatkov = imenik_uporabnika().podatki
     ime = trenutni_uporabnik().uporabnisko_ime
     shrani_trenutnega_uporabnika()
-    return bottle.template('imenik.html', imenik=slovar_podatkov, ime=ime)
+    return bottle.template('imenik.html',imenik=slovar_podatkov, ime=ime)
+
+@bottle.get("/poglej-imenik/")
+def imenik():
+    slovar_podatkov = imenik_uporabnika().podatki
+    return bottle.template('imenik.html', imenik=slovar_podatkov)
 
 @bottle.post('/odjava/')
 def odjava():
     shrani_trenutnega_uporabnika()
     bottle.response.delete_cookie('uporabnisko_ime', path='/')
     bottle.redirect('/')
+
+@bottle.get("/dodaj-kontakt/")
+def dodaj_kontakt():
+    return bottle.template("dodaj-kontakt.html")
 
 @bottle.post('/dodaj-kontakt/')
 def dodaj_kontakt():
@@ -119,6 +128,10 @@ def uredi_kontakt(indeks):
     imenik_uporabnika().uredi_kontakt(stevilo, priimek, ime, stevilka, mail, rojdan, opombe)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/imenik/')
+
+@bottle.get("/poisci-kontakt/")
+def poisci_kontakt():
+    return bottle.template('iskanje.html', rezultat=None)
 
 @bottle.post('/poisci-kontakt/')
 def poisci_kontakt():

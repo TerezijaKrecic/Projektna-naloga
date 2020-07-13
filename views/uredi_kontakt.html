@@ -2,33 +2,40 @@
 
 % rebase('base.html')
 
-<p>Uredi, kar je treba:</p>
-<form action="/uredi-kontakt{{ indeks }}/" method="post">
-    <table>
-      <tr>
-        <td><i>Priimek:</i></td>
-        <td><input type="text" name='priimek' value="{{ imenik[indeks]['priimek'] }}"></td>
-      </tr>
-      <tr>
-        <td><i>Ime:</i></td>
-        <td><input type='text' name='ime' value="{{ imenik[indeks]['ime'] }}"></td>
-      </tr>
-      <tr>
-        <td><i>Telefonska številka:</i></td>
-        <td><input type='number' name='stevilka' required value="{{ imenik[indeks]['stevilka'] }}"></td>
-      </tr>
-      <tr>
-        <td><i>Elektronski naslov:</i></td>
-        <td><input type='email' name='mail' value="{{ imenik[indeks]['mail'] }}"></td>
-      </tr>
-      <tr>
-        <td><i>Rojstni dan:</i></td>
-        <td><input type='date' name='rojdan' value="{{ imenik[indeks]['rojdan'] }}"></td>
-      </tr>
-      <tr>
-        <td><i>Opombe:</i></td>
-        <td><input type='text' name='opombe' value="{{ imenik[indeks]['opombe'] }}"></td>
-      </tr>
-    </table>
-    <button type="submit">Potrdi</button>
-  </form>
+  <div class="container has-text-centered">
+    <div class="column is-4 is-offset-4">
+      <form action="/uredi-kontakt{{ indeks }}/" method="post">
+        <div class="field">
+          <div class="control">
+            Priimek<input class="input" type='text' name='priimek' value="{{ imenik[indeks]['priimek'] }}" autofocus="">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            Ime<input class="input" type='text' name='ime' value="{{ imenik[indeks]['ime'] }}">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            Telefonska številka<input class="input" type='number' name='stevilka' value="{{ imenik[indeks]['stevilka'] }}" required>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            Elektronski naslov<input class="input" type='email' name='mail' value="{{ imenik[indeks]['mail'] }}">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            Rojstni dan<input class="input" type='date' name='rojdan' value="{{ imenik[indeks]['rojdan'] }}">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            Opombe<input class="input" type='text' name='opombe' value="{{ imenik[indeks]['opombe'] }}">
+          </div>
+        </div>
+        <button type="submit" class="button is-link is-outlined">Potrdi</button>
+      </form>
+    </div>
+  </div>

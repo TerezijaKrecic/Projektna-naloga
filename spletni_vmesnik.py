@@ -100,6 +100,7 @@ def dodaj_kontakt():
     rojdan = bottle.request.forms.getunicode('rojdan')
     opomba = bottle.request.forms.getunicode('opombe')
     imenik_uporabnika().dodaj_kontakt(priimek, ime, stevilka, mail, rojdan, opomba)
+    imenik_uporabnika().uredi_indekse()
     shrani_trenutnega_uporabnika()
     bottle.redirect('/imenik/')
 
@@ -123,7 +124,7 @@ def uredi_kontakt(indeks):
     mail = bottle.request.forms.getunicode('mail')
     rojdan = bottle.request.forms.getunicode('rojdan')
     opombe = bottle.request.forms.getunicode('opombe')
-    stevilo = indeks
+    stevilo = str(indeks)
     imenik_uporabnika().uredi_kontakt(stevilo, priimek, ime, stevilka, mail, rojdan, opombe)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/imenik/')

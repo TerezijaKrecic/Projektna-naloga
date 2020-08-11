@@ -21,14 +21,3 @@ Po vpisu ima uporabnik na voljo:
 * iskanje kontakta (s ključi 'ime', 'priimek' in 'telefonska številka')
 
 Ko uporabnik konča z opravili, se lahko odjavi in zapre program.
-
-Poleg spletnega vmesnika je na voljo tudi tekstovni vmesnik skupaj z modelom, ki se
-za tekstovni vmesnik razlikuje od tistega kot za spletni vmesnik, saj je tekstovni vmesnik
-precej osnoven in ne shranjuje stanja, ko odideš iz njega. Razlog za to je osredotočenost
-na spletni vmesnik - tekstovni vmesnik je bil le opora pri izbiri funkcij.  
-V njem ima uporabnik na voljo:
-* vpisati podatke za kontakt (priimek in številka obvezna)
-* izpisati slovar kontaktov
-* izbrisati kontakt
-* poiskati kontakt
-* urediti kontakt (ta funkcija ni dodelana)
